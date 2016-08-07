@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>电影租赁系统</title>
+</head>
+<body>
+	<center>
+	<h1>修改电影信息</h1>
+	<form action="FilmAddServlet" method="post">
+		<table>
+			<tr hidden="true">
+				<td>filmId</td>
+				<td><input type="text"  name="filmId" value="3"/></td>
+			</tr>
+			<tr>
+				<td>title</td>
+				<td><input type="text"  name="title" value="ADAPTATION HOLES  "/></td>
+			</tr>
+			<tr>
+				<td>description</td>
+				<td>
+					<textarea rows="10" name="description" >
+						A Astounding Reflection of a Lumberjack And a Car who must Sink a Lumberjack in A Baloon Factory
+					</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>language</td>
+				<td>
+					<select name="languageId">
+							<option value="1"
+									selected
+							>English</option>
+							<option value="2"
+							>Italian</option>
+							<option value="3"
+							>Japanese</option>
+							<option value="4"
+							>Mandarin</option>
+							<option value="5"
+							>French</option>
+							<option value="6"
+							>German</option>
+					</select>
+				</td>			
+			</tr>
+			<tr>
+				<td><input type="submit" value="保存"/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<a href="index.jsp">返回主页</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</center>
+</body>
+</html>

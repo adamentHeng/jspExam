@@ -3,19 +3,41 @@ package com.maheng.db;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import com.maheng.utils.StringUtils;
 
 public class QueryRunner {
+	private static Connection conn = DBUtils.openConn();
 	
-	public static <T> T queryUnique(Connection conn, String sql, Class<T> beanClass ,Object... params) throws SQLException{
+	/**
+	 * 执行INSERT/UPDATE/DELETE语句
+	 * @throws SQLException 
+	 */
+	public static int update(String sql, Object...params) throws SQLException {
+		if( conn == null ){
+			throw new SQLException("Connection is null");
+		}
+		
+		if( sql == null ){
+			throw new SQLException("Sql statement is null");
+		}
+		
+		PreparedStatement preparedStatement = null;
+		preparedStatement = conn.prepareStatement(sql);
+		for( int i = 0; i < params.length; i++ ){
+			preparedStatement.setObject(i+1, params[i]);
+		}
+		return preparedStatement.executeUpdate();
+	}
+	
+	public static <T> T queryUnique(String sql, Class<T> beanClass ,Object... params) throws SQLException{
 		if( conn == null ){
 			throw new SQLException("Connection is null");
 		}
@@ -67,7 +89,7 @@ public class QueryRunner {
 		return result;
 	}
 	
-	public static <T> List<T> query(Connection conn, String sql, Class<T> beanClass ,Object... params) throws SQLException{
+	public static <T> List<T> query(String sql, Class<T> beanClass ,Object... params) throws SQLException{
 		if( conn == null ){
 			throw new SQLException("Connection is null");
 		}
@@ -120,7 +142,6 @@ public class QueryRunner {
 		}
 		return list;
 	}
-	
 	
 	private static Class<?> dbTypeToJavaType(String type){
 		type = type.toLowerCase();

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -13,14 +14,29 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </head>
 <body>
 	<center>
-		<form action="login" method="post">
+	<h1>新增电影</h1>
+	<form action="FilmAddServlet" method="post">
 		<table>
 			<tr>
-				<td>用户名</td>
-				<td><input type="text"  name="name" /></td>
+				<td>title</td>
+				<td><input type="text"  name="title" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="登录"/></td>
+				<td>description</td>
+				<td><input type="text" name="description"/></td>
+			</tr>
+			<tr>
+				<td>language</td>
+				<td>
+					<select name="languageId">
+						<c:forEach items="${languageList}" var="name" varStatus="idx">
+							<option value="${name.languageId }">${name.name }</option>
+		  				</c:forEach>	
+					</select>
+				</td>			
+			</tr>
+			<tr>
+				<td><input type="submit" value="保存"/></td>
 			</tr>
 		</table>
 	</form>

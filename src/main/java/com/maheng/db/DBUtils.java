@@ -62,6 +62,7 @@ public class DBUtils {
 		try {
 			if( conn != null && !conn.isClosed() ){
 				conn.close();
+				conns.remove();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

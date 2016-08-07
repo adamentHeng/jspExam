@@ -11,33 +11,79 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>电影租赁系统</title>
+<style>
+		td, th {
+			border: 1px solid black;
+		}
+		table {
+			border-collapse: collapse;
+			text-align: center;
+		}
+		caption {
+			font-size: 25px;
+		}
+</style>
 </head>
 <body>
 <center>
-	<table>
+	<table width="80%">
+		<caption>电影列表</caption>
 		<thead>
 			<tr>
-				<td style="margin:10px;">film_id</td>
-				<td style="margin:10px;">title</td>
-				<td style="margin:10px;">description</td>
-				<td style="margin:10px;">language</td>
+				<th>film_id</th>
+				<th>title</th>
+				<th>description</th>
+				<th>language</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
-		<% List<List<Object>> result = (List<List<Object>>)request.getAttribute("filmList");
-		   for( List<Object> list : result ){ 
-		   request.setAttribute("list", list);%>
+		<c:forEach items="${filmList}" var="list"  varStatus="idx">
 		   <tr>
-			<c:forEach items="${list}" var="name" varStatus="idx">
-				<td> ${name}</td>
-	  		</c:forEach>
+				<td> ${list[0].filmId}</td>
+				<td> ${list[0].title}</td>
+				<td> ${list[0].description}</td>
+				<td> ${list[1].name}</td>
+	  		<td>
+	  			<a href="/FilmRemoveServlet?filmId=${list[0].filmId}">删除</a>
+	  			<a href="/FilmUpdateServlet?filmId=${list[0].filmId}&title=${list[0].title}
+	  			&description=${list[0].description}&languageId=${list[0].languageId}">编辑</a>
+	  		</td>
 	  		</tr>
-		  <% }	
-		%>
+		</c:forEach>
 		</tbody>
-		<
+		<tfoot>
+			<tr>
+				<td colspan="5">
+					<form action="FilmShowServlet" >
+						<select name="count">
+							<option value="10" 
+							<% Integer count = (Integer)request.getAttribute("count"); 
+							if(count == 10){%>
+								selected <%}%>>10</option>
+							<option value="20" 
+							<% if(count == 20){
+							%>
+								selected <%}%>>20</option>
+							<option value="50" 
+							<% if(count == 50){%>
+								selected <%}%>>50</option>
+						</select>
+						<a href="FilmShowServlet?page=1&count=${count}">首页</a>
+						<a href="FilmShowServlet?page=${page-1 > 0 ? page - 1 : 1}&count=${count}">上一页</a>
+						第
+						<input name="page" style="width:20px;" value="${page}"/>
+						共${total}页
+						<a href="FilmShowServlet?page=${page+1 > total ? total : page + 1}&count=${count}">下一页</a>
+						<a href="FilmShowServlet?page=${total}&count=${count}">尾页</a>
+						<input type="submit" value="刷新"/>
+					</form>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
+	
 </center>
 </body>
 </html>

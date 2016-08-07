@@ -13,7 +13,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </head>
 <body>
 	<center>
-		<a href="/login.jsp">用户登录</a>
+		<h1>电影租赁系统</h1>
+		<a href="/login.jsp"><h3>用户登录</h3></a>
+		<a href="/FilmShowServlet"><h3>电影管理</h3></a>
+		<a href="/addFilm.jsp"><h3>新增电影</h3></a>
 	</center>
 </body>
 </html>

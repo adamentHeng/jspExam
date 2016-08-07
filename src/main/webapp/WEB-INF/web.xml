@@ -47,5 +47,42 @@
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>FilmShowServlet</servlet-name>
+		<servlet-class>com.hand.web.FilmShowServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FilmShowServlet</servlet-name>
+		<url-pattern>/FilmShowServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FilmRemoveServlet</servlet-name>
+		<servlet-class>com.hand.web.FilmRemoveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FilmRemoveServlet</servlet-name>
+		<url-pattern>/FilmRemoveServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FilmAddServlet</servlet-name>
+		<servlet-class>com.hand.web.FilmAddServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>FilmUpdateServlet</servlet-name>
+		<display-name>FilmUpdateServlet</display-name>
+		<description></description>
+		<servlet-class>com.hand.web.FilmUpdateServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>FilmAddServlet</servlet-name>
+		<url-pattern>/FilmAddServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FilmUpdateServlet</servlet-name>
+		<url-pattern>/FilmUpdateServlet</url-pattern>
+	</servlet-mapping>
+	
 	
 </web-app>
